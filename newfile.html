@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مكتب إبراهيم للبرمجة - حلول تقنية متكاملة</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* الشريط العلوي */
+        .top-bar {
+            background-color: var(--primary);
+            color: white;
+            padding: 10px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-bar-contact {
+            display: flex;
+            gap: 20px;
+        }
+
+        .top-bar-contact a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        /* شريط التنقل */
+        .navbar {
+            background-color: white;
+            box-shadow: var(--shadow);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .logo-text span {
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--secondary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* القسم الرئيسي */
+        .hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)), url('https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80') center/cover no-repeat;
+            color: white;
+            padding: 100px 5%;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--secondary);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+            margin-left: 10px;
+        }
+
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--primary);
+        }
+
+        /* قسم الخدمات */
+        .services {
+            padding: 80px 5%;
+            background-color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: #777;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        /* قسم المشاريع */
+        .projects {
+            padding: 80px 5%;
+            background-color: #f5f7fa;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .project-image {
+            height: 200px;
+            background-color: var(--secondary);
+            position: relative;
+        }
+
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(52, 152, 219, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .project-overlay a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 10px;
+        }
+
+        .project-info {
+            padding: 20px;
+        }
+
+        .project-info h3 {
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background-color: var(--light);
+            color: var(--secondary);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        /* قسم العملاء */
+        .clients {
+            padding: 80px 5%;
+            background-color: white;
+        }
+
+        .clients-logos {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .client-logo {
+            width: 150px;
+            height: 80px;
+            background-color: #f5f7fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 5px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        /* نظام الإدارة */
+        .admin-panel {
+            padding: 80px 5%;
+            background-color: #f5f7fa;
+        }
+
+        .admin-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .admin-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-tabs {
+            display: flex;
+            background-color: #f0f0f0;
+        }
+
+        .admin-tab {
+            padding: 15px 20px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .admin-tab.active {
+            background-color: white;
+            border-bottom: 3px solid var(--secondary);
+            font-weight: bold;
+        }
+
+        .admin-content {
+            padding: 30px;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--secondary);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: right;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+
+        tr:hover {
+            background-color: #f5f7fa;
+        }
+
+        .action-btn {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 0 5px;
+        }
+
+        .edit-btn {
+            background-color: var(--warning);
+            color: white;
+        }
+
+        .delete-btn {
+            background-color: var(--accent);
+            color: white;
+        }
+
+        /* تذييل الصفحة */
+        .footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 60px 5% 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+            padding-right: 5px;
+        }
+
+        .contact-info {
+            list-style: none;
+        }
+
+        .contact-info li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ddd;
+        }
+
+        /* تصميم متجاوب */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-bar {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                right: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero {
+                padding: 80px 5%;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .btn {
+                display: block;
+                margin-bottom: 10px;
+                width: 100%;
+            }
+            
+            .btn-outline {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- الشريط العلوي -->
+    <div class="top-bar">
+        <div class="top-bar-contact">
+            <a href="tel:+966123456789"><i class="fas fa-phone"></i> +966 12 345 6789</a>
+            <a href="mailto:info@ibrahim-dev.com"><i class="fas fa-envelope"></i> info@ibrahim-dev.com</a>
+        </div>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+    </div>
+
+    <!-- شريط التنقل -->
+    <nav class="navbar">
+        <div class="logo">
+            <div class="logo-text">مكتب <span>إبراهيم</span> للبرمجة</div>
+        </div>
+        <div class="nav-links">
+            <a href="#" class="active">الرئيسية</a>
+            <a href="#">من نحن</a>
+            <a href="#">الخدمات</a>
+            <a href="#">المشاريع</a>
+            <a href="#">العملاء</a>
+            <a href="#">المدونة</a>
+            <a href="#">اتصل بنا</a>
+        </div>
+        <div class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- القسم الرئيسي -->
+    <section class="hero">
+        <h1>حلول برمجية إبداعية لمستقبل رقمي</h1>
+        <p>نقدم خدمات تطوير الويب والتطبيقات والحلول التقنية المتكاملة بأحدث التقنيات وأعلى معايير الجودة</p>
+        <a href="#" class="btn">عرض المشاريع</a>
+        <a href="#" class="btn btn-outline">اتصل بنا</a>
+    </section>
+
+    <!-- قسم الخدمات -->
+    <section class="services">
+        <div class="section-title">
+            <h2>خدماتنا</h2>
+            <p>نقدم مجموعة واسعة من الخدمات البرمجية لتلبية احتياجات أعمالك</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+                <h3>تطوير الويب</h3>
+                <p>تصميم وتطوير مواقع الويب الاحترافية والتجارة الإلكترونية والأنظمة المتكاملة</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>تطبيقات الجوال</h3>
+                <p>بناء تطبيقات الجوال لنظامي iOS و Android بجودة عالية وأداء ممتاز</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-paint-brush"></i>
+                </div>
+                <h3>التصميم UI/UX</h3>
+                <p>تصميم واجهات مستخدم جذابة وسهلة الاستخدام تعزز تجربة المستخدم</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-server"></i>
+                </div>
+                <h3>استضافة وإدارة</h3>
+                <p>حلول استضافة احترافية وإدارة وصيانة الخوادم والأنظمة</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>التسويق الرقمي</h3>
+                <p>حلول تسويقية متكاملة لتعزيز حضورك الرقمي وزيادة العملاء</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <h3>الدعم الفني</h3>
+                <p>خدمات دعم فني متكاملة على مدار الساعة لحل المشكلات الفنية</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم المشاريع -->
+    <section class="projects">
+        <div class="section-title">
+            <h2>أحدث مشاريعنا</h2>
+            <p>استكشف مجموعة من مشاريعنا المميزة التي نفخر بها</p>
+        </div>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-image">
+                    <div class="project-overlay">
+                        <a href="#"><i class="fas fa-search-plus"></i></a>
+                        <a href="#"><i class="fas fa-link"></i></a>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <h3>نظام إدارة المدارس</h3>
+                    <p>نظام متكامل لإدارة المدارس والمنشآت التعليمية</p>
+                    <div class="project-tags">
+                        <span class="tag">PHP</span>
+                        <span class="tag">Laravel</span>
+                        <span class="tag">Vue.js</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-image">
+                    <div class="project-overlay">
+                        <a href="#"><i class="fas fa-search-plus"></i></a>
+                        <a href="#"><i class="fas fa-link"></i></a>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <h3>تطبيق توصيل طلبات</h3>
+                    <p>تطبيق جوال لنظام توصيل الطلبات للمطاعم والمقاهي</p>
+                    <div class="project-tags">
+                        <span class="tag">React Native</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">MongoDB</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-image">
+                    <div class="project-overlay">
+                        <a href="#"><i class="fas fa-search-plus"></i></a>
+                        <a href="#"><i class="fas fa-link"></i></a>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <h3>منصة تعليم إلكتروني</h3>
+                    <p>منصة متكاملة للتعليم عن بعد وتدريب الموظفين</p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Django</span>
+                        <span class="tag">PostgreSQL</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم العملاء -->
+    <section class="clients">
+        <div class="section-title">
+            <h2>عملاؤنا</h2>
+            <p>شركات ومؤسسات وثقت بخدماتنا البرمجية</p>
+        </div>
+        <div class="clients-logos">
+            <div class="client-logo">شركة التقنية</div>
+            <div class="client-logo">مؤسسة المستقبل</div>
+            <div class="client-logo">مجموعة الإبداع</div>
+            <div class="client-logo">أكاديمية العلوم</div>
+            <div class="client-logo">مطاعم الطيب</div>
+        </div>
+    </section>
+
+    <!-- نظام الإدارة -->
+    <section class="admin-panel">
+        <div class="section-title">
+            <h2>نظام إدارة الموقع</h2>
+            <p>لوحة تحكم لإدارة محتوى الموقع والمشاريع والعملاء</p>
+        </div>
+        <div class="admin-container">
+            <div class="admin-header">
+                <h3>لوحة تحكم مكتب إبراهيم للبرمجة</h3>
+                <div class="admin-actions">
+                    <button class="btn">تسجيل الخروج</button>
+                </div>
+            </div>
+            <div class="admin-tabs">
+                <div class="admin-tab active" data-tab="projects">إدارة المشاريع</div>
+                <div class="admin-tab" data-tab="services">إدارة الخدمات</div>
+                <div class="admin-tab" data-tab="clients">إدارة العملاء</div>
+                <div class="admin-tab" data-tab="content">إدارة المحتوى</div>
+            </div>
+            <div class="admin-content">
+                <!-- إدارة المشاريع -->
+                <div class="tab-content active" id="projects">
+                    <h3>إدارة المشاريع</h3>
+                    <button class="btn" id="add-project">إضافة مشروع جديد</button>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>اسم المشروع</th>
+                                <th>التصنيف</th>
+                                <th>تاريخ الإضافة</th>
+                                <th>الحالة</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>نظام إدارة المدارس</td>
+                                <td>تطبيقات ويب</td>
+                                <td>2023-10-15</td>
+                                <td>منشور</td>
+                                <td>
+                                    <button class="action-btn edit-btn">تعديل</button>
+                                    <button class="action-btn delete-btn">حذف</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>تطبيق توصيل طلبات</td>
+                                <td>تطبيقات جوال</td>
+                                <td>2023-09-22</td>
+                                <td>منشور</td>
+                                <td>
+                                    <button class="action-btn edit-btn">تعديل</button>
+                                    <button class="action-btn delete-btn">حذف</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>منصة تعليم إلكتروني</td>
+                                <td>تطبيقات ويب</td>
+                                <td>2023-11-05</td>
+                                <td>مسودة</td>
+                                <td>
+                                    <button class="action-btn edit-btn">تعديل</button>
+                                    <button class="action-btn delete-btn">حذف</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- إدارة الخدمات -->
+                <div class="tab-content" id="services">
+                    <h3>إدارة الخدمات</h3>
+                    <button class="btn" id="add-service">إضافة خدمة جديدة</button>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>اسم الخدمة</th>
+                                <th>الوصف المختصر</th>
+                                <th>الأيقونة</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>تطوير الويب</td>
+                                <td>تصميم وتطوير مواقع الويب الاحترافية</td>
+                                <td><i class="fas fa-laptop-code"></i></td>
+                                <td>
+                                    <button class="action-btn edit-btn">تعديل</button>
+                                    <button class="action-btn delete-btn">حذف</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>تطبيقات الجوال</td>
+                                <td>بناء تطبيقات الجوال لنظامي iOS و Android</td>
+                                <td><i class="fas fa-mobile-alt"></i></td>
+                                <td>
+                                    <button class="action-btn edit-btn">تعديل</button>
+                                    <button class="action-btn delete-btn">حذف</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- تذييل الصفحة -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>عن الشركة</h3>
+                <p>مكتب إبراهيم للبرمجة هو شركة رائدة في مجال تطوير البرمجيات وتقديم الحلول التقنية المتكاملة للشركات والمؤسسات في المنطقة.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>روابط سريعة</h3>
+                <ul class="footer-links">
+                    <li><a href="#">الرئيسية</a></li>
+                    <li><a href="#">من نحن</a></li>
+                    <li><a href="#">الخدمات</a></li>
+                    <li><a href="#">المشاريع</a></li>
+                    <li><a href="#">اتصل بنا</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>خدماتنا</h3>
+                <ul class="footer-links">
+                    <li><a href="#">تطوير الويب</a></li>
+                    <li><a href="#">تطبيقات الجوال</a></li>
+                    <li><a href="#">تصميم UI/UX</a></li>
+                    <li><a href="#">استضافة وإدارة</a></li>
+                    <li><a href="#">التسويق الرقمي</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>اتصل بنا</h3>
+                <ul class="contact-info">
+                    <li><i class="fas fa-map-marker-alt"></i> شارع الملك عبدالعزيز، الرياض، المملكة العربية السعودية</li>
+                    <li><i class="fas fa-phone"></i> +966 12 345 6789</li>
+                    <li><i class="fas fa-envelope"></i> info@ibrahim-dev.com</li>
+                    <li><i class="fas fa-clock"></i> الأحد - الخميس: 8 صباحاً - 5 مساءً</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>جميع الحقوق محفوظة &copy; مكتب إبراهيم للبرمجة 2023</p>
+        </div>
+    </footer>
+
+    <script>
+        // تنشيط علامات التبويب في لوحة الإدارة
+        document.querySelectorAll('.admin-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // إزالة النشاط من جميع العلامات
+                document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // إضافة النشاط للعلامة المحددة
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab).classList.add('active');
+            });
+        });
+
+        // القائمة المتنقلة للهواتف
+        document.querySelector('.mobile-menu-btn').addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // إضافة مشروع جديد
+        document.getElementById('add-project').addEventListener('click', () => {
+            alert('ستفتح هنا نافذة لإضافة مشروع جديد');
+            // في التطبيق الفعلي، سيتم فتح نموذج إضافة مشروع
+        });
+
+        // إضافة خدمة جديدة
+        document.getElementById('add-service').addEventListener('click', () => {
+            alert('ستفتح هنا نافذة لإضافة خدمة جديدة');
+            // في التطبيق الفعلي، سيتم فتح نموذج إضافة خدمة
+        });
+
+        // تنفيذ إجراءات على العناصر
+        document.querySelectorAll('.edit-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                alert('ستفتح هنا نافذة لتعديل العنصر');
+            });
+        });
+
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if(confirm('هل أنت متأكد من رغبتك في حذف هذا العنصر؟')) {
+                    const row = this.closest('tr');
+                    row.style.opacity = '0';
+                    setTimeout(() => row.remove(), 300);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
